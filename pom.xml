@@ -5,7 +5,7 @@
     <groupId>net.hs.easyj</groupId>
     <artifactId>easyj</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <name>EasyJ</name>
 
@@ -22,7 +22,8 @@
         <url>https://github.com/hs-fcloud/easyj</url>
         <connection>scm:git:https://github.com/hs-fcloud/easyj.git</connection>
         <developerConnection>scm:git:https://github.com/hs-fcloud/easyj.git</developerConnection>
-    </scm>
+      <tag>easyj-1.0.1</tag>
+  </scm>
 
     <repositories>
         <repository>
