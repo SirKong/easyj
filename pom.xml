@@ -5,7 +5,7 @@
     <groupId>net.hs.easyj</groupId>
     <artifactId>easyj</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
 
     <name>EasyJ</name>
 
@@ -22,7 +22,7 @@
         <url>https://github.com/wusthuke/easyj</url>
         <connection>scm:git:https://github.com/wusthuke/easyj.git</connection>
         <developerConnection>scm:git:https://github.com/wusthuke/easyj.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>easyj-1.0.2</tag>
   </scm>
 
     <repositories>
