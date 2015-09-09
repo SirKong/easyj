@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="cacheManager" class="net.hs.easyj.cache.tair.TairCacheManager">
+        <property name="tairCaches">
+            <list>
+                <ref local="defaultCache"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="defaultCache" class="net.hs.easyj.cache.tair.TairCache">
+        <property name="name" value="defaultCache"/>
+        <property name="namespace" value="0"/>
+        <property name="tairManager">
+            <bean class="com.taobao.tair.impl.DefaultTairManager" init-method="init">
+                <property name="charset" value="UTF-8"/>
+                <property name="timeout" value="5000"/>
+                <property name="groupName" value="group_1"/>
+                <property name="configServerList">
+                    <list>
+                        <value>10.253.6.50:5198</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+</beans>

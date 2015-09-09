@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.WidgetEventDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.WidgetEvent" useGeneratedKeys="true" keyProperty="id">
+        insert into widget_event(tenant_id, widget_id, name, expression)
+        values(#{tenantId}, #{widgetId}, #{name}, #{expression})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.WidgetEvent">
+        select <include refid="selectColumns"/> from widget_event where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.WidgetEvent" resultType="net.hs.easyj.saas.model.WidgetEvent">
+        select <include refid="selectColumns"/> from widget_event <include refid="dynamicWhere" />
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, widget_id as widgetId, id, name, expression
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="widgetId != null">
+                and widget_id = #{widgetId}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

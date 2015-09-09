@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xdoc title="产品选择组件" category="原子组件">
+    <section title="用法">
+
+    </section>
+    <section title="示例">
+
+    </section>
+    <section title="数据" type="code">
+
+    </section>
+    <section title="主动事件">
+        <![CDATA[
+        <table>
+            <tr>
+                <th></th>
+            </tr>
+        </table>
+        ]]>
+    </section>
+    <section title="被动事件">
+
+    </section>
+</xdoc>

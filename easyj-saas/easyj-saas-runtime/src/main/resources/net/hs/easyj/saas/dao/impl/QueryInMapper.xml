@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.QueryInDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.QueryIn" useGeneratedKeys="true" keyProperty="id">
+        insert into query_in(tenant_id, query_id, name, label, type, `order`, format, default_value, value_provider)
+        values(#{tenantId}, #{queryId}, #{name}, #{label}, #{type}, #{order}, #{format}, #{defaultValue}, #{valueProvider})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.QueryIn">
+        select <include refid="selectColumns"/> from query_in where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.QueryIn" resultType="net.hs.easyj.saas.model.QueryIn">
+        select <include refid="selectColumns"/> from query_in <include refid="dynamicWhere" />
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, query_id as queryId, default_value as defaultValue, value_provider as valueProvider,
+        id, name, label, type, `order`, format
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="queryId != null">
+                and query_id = #{queryId}
+            </if>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.UserDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.User" useGeneratedKeys="true" keyProperty="id">
+        insert into `user`(tenant_id, username, password, email, mobile, phone, address, status)
+        values(#{tenantId}, #{username}, #{password}, #{email}, #{mobile}, #{phone}, #{address}, #{status})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.User">
+        select <include refid="selectColumns"/> from `user` where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.User" resultType="net.hs.easyj.saas.model.User">
+        select <include refid="selectColumns"/> from `user` <include refid="dynamicWhere" />
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, username, password, email, mobile, phone, address, status
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="username != null">
+                and username = #{username}
+            </if>
+            <if test="email != null">
+                and email = #{email}
+            </if>
+            <if test="phone != null">
+                phone = #{phone}
+            </if>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

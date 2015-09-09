@@ -1,0 +1,23 @@
+<div th:title="${xDoc.title}" class="xdoc">
+    <ul>
+        <li th:each="xDocSection : ${xDoc.sections}" class="xdoc-section">
+            <h3 th:text="${xDocSection.title}"></h3>
+            <div th:if="${xDocSection.type=='html'}" th:utext="${xDocSection.content}"></div>
+            <pre th:if="${xDocSection.type=='code'}" th:text="${xDocSection.content}" class="prettyprint pre-scrollable linenums"></pre>
+            <!--/*/ <th:block th:if="${xDocSection.type=='link'}"> /*/-->
+            <ul>
+                <li th:each="link : ${xDocSection.getContent('link')}">
+                    <a target="_blank" th:href="@{{location}?name={name}&amp;resource={resource}(location=${xDocSection.location},name=${xDoc.name},resource=${#strings.substringBefore(link, '|')})}" th:text="${#strings.substringAfter(link, '|')}"></a>
+                </li>
+            </ul>
+            <!--/*/ </th:block> /*/-->
+        </li>
+    </ul>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(document).ready(function () {
+            prettyPrint();
+        });
+        /*]]>*/
+    </script>
+</div>

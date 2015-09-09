@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>财富云Web开发框架</title>
+        <link rel="stylesheet" type="text/css" th:href="@{'/static/resources/easyui/themes/metro/easyui.css'}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/static/resources/easyui/themes/icon.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/static/resources/prettify/prettify.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/static/themes/default/css/style.css}"/>
+
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+        <script type="text/javascript" th:src="@{/static/resources/easyui/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/static/resources/easyui/jquery.easyui.min.js}"></script>
+        <script type="text/javascript" th:src="@{/static/resources/easyui/easyui-lang-zh_CN.js}"></script>
+        <script type="text/javascript" th:src="@{/static/resources/prettify/prettify.js}"></script>
+
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            $(document).ready(function () {
+                /**
+                 * 监听tree事件
+                 */
+                $('#west .easyui-tree').tree({
+                    onClick: function (node) {
+                        if (node.attributes && node.attributes.url) {
+                            openTab({title: node.text, url: node.attributes.url});
+                        }
+                    }
+                });
+
+                /**
+                 * 打开 tab 页
+                 *
+                 * @param tab {title: '', url: ''}
+                 */
+                function openTab(tab) {
+                    var $tabs = $('#center .easyui-tabs');
+                    if ($tabs.tabs('exists', tab.title)) {
+                        $tabs.tabs('select', tab.title);
+                    } else {
+                        var contextPath = /*[[@{/}]]*/ "";
+                        if (contextPath.indexOf(";") > 0) {
+                            contextPath = contextPath.substring(0, contextPath.indexOf(";"));
+                        }
+                        $tabs.tabs('add', {
+                            title: tab.title,
+                            href: contextPath + tab.url,
+                            closable: true,
+                            tools: [{
+                                iconCls: 'icon-mini-refresh',
+                                handler: function () {
+                                    refreshTab();
+                                }
+                            }]
+                        });
+                    }
+                }
+
+                /**
+                 * 刷新 tab
+                 */
+                function refreshTab() {
+                    var $tabs = $('#center .easyui-tabs');
+                    var $tab = $tabs.tabs('getSelected');
+                    $tab.panel('refresh');
+                }
+            });
+            /*]]>*/
+        </script>
+    </head>
+    <body class="easyui-layout">
+        <div id="north" data-options="region:'north'" style="height:60px; overflow: hidden;">
+            <div th:replace="barner"></div>
+        </div>
+        <div id="west" data-options="region:'west',title:'文档结构',split:true" style="width:200px;">
+            <div th:replace="file_structure"></div>
+        </div>
+        <div id="center" data-options="region:'center',title:'文档内容'" style="height:700px">
+            <div class="easyui-tabs" data-options="border:false,fit:true">
+
+            </div>
+        </div>
+    </body>
+</html>

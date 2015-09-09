@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean class="net.hs.easyj.zk.ZkConnection" init-method="init" destroy-method="close">
+        <property name="zookeepers" value="localhost:2181"/>
+    </bean>
+
+    <bean class="net.hs.easyj.config.spring.ObjectConfigFactoryBeanProcessor">
+        <property name="system" value="pay"/>
+        <property name="profile" value="development"/>
+    </bean>
+
+    <bean id="baseProperties" class="net.hs.easyj.config.spring.properties.PropertiesFactoryBean">
+        <property name="configPath" value="/base"/>
+    </bean>
+
+    <bean id="dataSource" class="net.hs.easyj.config.spring.datasource.DbcpDataSourceFactoryBean">
+        <property name="configPath" value="/czbbase"/>
+    </bean>
+
+    <bean id="fileSystem" class="net.hs.easyj.config.spring.filesystem.VirtualFileSystemFactoryBean">
+        <property name="configPath" value="/base"/>
+        <property name="objectListener">
+            <bean class="net.hs.easyj.config.spring.filesystem.FileSystemListener">
+            </bean>
+        </property>
+    </bean>
+
+</beans>

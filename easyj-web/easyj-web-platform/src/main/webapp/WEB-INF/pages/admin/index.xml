@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page layout="layout_login">
+    <position name="main">
+        <widget path="/system/login.htm">
+            <events>
+                <event on="login-success">/dashboard.html</event>
+            </events>
+        </widget>
+    </position>
+</page>

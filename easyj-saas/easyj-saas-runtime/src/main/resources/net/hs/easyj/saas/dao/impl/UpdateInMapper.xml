@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.UpdateInDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.UpdateIn" useGeneratedKeys="true" keyProperty="id">
+        insert into update_in(tenant_id, update_id, name, label, type, `order`, format, default_value, value_provider)
+        values(#{tenantId}, #{updateId}, #{name}, #{label}, #{type}, #{order}, #{format}, #{defaultValue}, #{valueProvider})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.UpdateIn">
+        select <include refid="selectColumns"/> from update_in where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.UpdateIn" resultType="net.hs.easyj.saas.model.UpdateIn">
+        select <include refid="selectColumns"/> from update_in <include refid="dynamicWhere" />
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, update_id as updateId, default_value as defaultValue, value_provider as valueProvider,
+        id, name, label, type, `order`, format
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="updateId != null">
+                and update_id = #{updateId}
+            </if>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

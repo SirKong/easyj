@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="net.hs.easyj.web.platform"/>
+
+    <mvc:annotation-driven/>
+
+    <mvc:resources mapping="/static/**" location="classpath:/META-INF/web-resources/" cache-period="2000"/>
+
+    <!-- post processors -->
+    <bean class="net.hs.easyj.web.widget.annotation.WidgetMvcPostProcessor"/>
+    <bean class="net.hs.easyj.web.widget.view.thymeleaf.SpringTemplateEnginePostProcessor"/>
+
+    <bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="templateEngine" ref="templateEngine" />
+        <property name="characterEncoding" value="UTF-8"/>
+        <property name="order" value="1" />
+    </bean>
+
+    <bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+        <property name="additionalDialects">
+            <set>
+                <bean class="net.hs.easyj.web.widget.view.thymeleaf.dialect.LayoutDialect"/>
+            </set>
+        </property>
+        <property name="templateResolvers">
+            <set>
+                <ref local="templateResolver1"/>
+                <ref local="templateResolver2"/>
+            </set>
+        </property>
+    </bean>
+    <bean id="templateResolver2" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="characterEncoding" value="UTF-8" />
+        <property name="prefix" value="/WEB-INF/widgets/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <property name="cacheable" value="false"/>
+    </bean>
+    <bean id="templateResolver1" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="characterEncoding" value="UTF-8" />
+        <property name="prefix" value="/WEB-INF/themes/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <property name="cacheable" value="false"/>
+    </bean>
+
+</beans>

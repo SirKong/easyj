@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title th:text="${resource}">源码</title>
+        <link rel="stylesheet" type="text/css" th:href="@{'/static/resources/easyui/themes/metro/easyui.css'}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/static/resources/easyui/themes/icon.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/static/resources/prettify/prettify.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/static/themes/default/css/style.css}"/>
+
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+        <script type="text/javascript" th:src="@{/static/resources/easyui/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/static/resources/easyui/jquery.easyui.min.js}"></script>
+        <script type="text/javascript" th:src="@{/static/resources/easyui/easyui-lang-zh_CN.js}"></script>
+        <script type="text/javascript" th:src="@{/static/resources/prettify/prettify.js}"></script>
+
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            $(document).ready(function () {
+                prettyPrint();
+            });
+            /*]]>*/
+        </script>
+    </head>
+    <body>
+        <pre class="prettyprint pre-scrollable linenums" th:text="${source}"></pre>
+    </body>
+</html>

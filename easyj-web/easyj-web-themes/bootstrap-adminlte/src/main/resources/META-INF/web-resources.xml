@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-resources>
+    <!-- Plugins -->
+    <web-resource name="jquery" version="2.1.4">
+        <js>/plugins/jQuery/jQuery-2.1.4.min.js</js>
+    </web-resource>
+    <web-resource name="jquery-ui" version="">
+        <js>/plugins/jQueryUI/jquery-ui.min.js</js>
+    </web-resource>
+
+    <!-- Font Awesome -->
+    <web-resource name="font-awesome" version="4.0.0">
+        <css>/font-awesome/css/font-awesome.min.css</css>
+    </web-resource>
+
+    <!-- Bootstrap -->
+    <web-resource name="bootstrap" version="3.2.4" depends="jquery(2.1.4)">
+        <css>/bootstrap/css/bootstrap.min.css</css>
+        <js>/bootstrap/js/bootstrap.min.js</js>
+    </web-resource>
+
+    <!-- AdminLTE -->
+    <web-resource name="adminlte" version="2.3.0" depends="font-awesome(4.0.0),bootstrap(3.2.4)">
+        <css>/adminlte/css/AdminLTE.min.css</css>
+        <css>/adminlte/css/skins/_all-skins.min.css</css>
+        <js>/adminlte/js/app.js</js>
+    </web-resource>
+
+</web-resources>

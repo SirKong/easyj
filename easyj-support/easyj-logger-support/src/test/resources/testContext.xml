@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="loggerService" class="net.hs.easyj.logger.LoggerService"></bean>
+
+    <bean id="loggerServiceAspect" class="net.hs.easyj.logger.LoggerAspect">
+        <property name="before">
+            <map>
+                <entry key="info">
+                    <value>日志服务调用前的入参为：${argument0}</value>
+                </entry>
+            </map>
+        </property>
+        <property name="afterReturning">
+            <map>
+                <entry key="info">
+                    <value>日志服务调用后的返回值为：${returnValue}</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <aop:config>
+        <aop:aspect ref="loggerServiceAspect">
+            <aop:pointcut id="loggerServicePointcut" expression="execution(* net.hs.easyj.logger.LoggerService.*(..))"/>
+            <aop:around method="around" pointcut-ref="loggerServicePointcut" />
+        </aop:aspect>
+    </aop:config>
+
+</beans>

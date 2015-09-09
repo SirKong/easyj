@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>配置</title>
+
+    <!-- Bootstrap -->
+    <link th:href="@{/static/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/static/treemenu/jquery.treemenu.css}" rel="stylesheet"/>
+    <link th:href="@{/static/theme.css}" rel="stylesheet"/>
+
+    <script th:src="@{/static/jquery/jquery.min.js}"></script>
+    <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/treemenu/jquery.treemenu.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1><a th:href="@{/index.html}">统一配置</a></h1>
+        </div>
+    </div>
+    <div class="row" th:if="${param.containsKey('error')}">
+        <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+                <p th:if="${param.error[0]=='categoryIsEmpty'}">主分类不能为空！</p>
+                <p th:if="${param.error[0]=='subCategory1IsEmpty'}">子分类1不能为空！</p>
+                <p th:if="${param.error[0]=='pathIsEmpty'}">配置路径不能为空！</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"  layout:fragment="left">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">配置树</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="tree" th:if="${objectConfigPath}!=null">
+                        <li th:if="${#lists.size(child_l0.children)} gt 0" th:each="child_l0 : ${objectConfigPath.children}">
+                            <span th:text="${child_l0.name}"></span>
+                            <!-- layer 2 -->
+                            <ul>
+                                <li th:each="child_l1 : ${child_l0.children}">
+                                    <a th:href="@{/config/edit.html(targetPath=${child_l1.path})}"
+                                       th:class="${#strings.equals(child_l1.path, targetPath) ? 'active' : ''}"
+                                       th:if="${#lists.size(child_l1.children)} eq 0"
+                                       th:text="${child_l1.name}"></a>
+                                    <span th:if="${#lists.size(child_l1.children)} gt 0" th:text="${child_l1.name}"></span>
+
+                                    <ul th:if="${#lists.size(child_l1.children)} gt 0">
+                                        <li th:each="child_l2 : ${child_l1.children}">
+                                            <a th:href="@{/config/edit.html(targetPath=${child_l2.path})}"
+                                               th:class="${#strings.equals(child_l2.path, targetPath) ? 'active' : ''}"
+                                               th:if="${#lists.size(child_l2.children)} eq 0"
+                                               th:text="${child_l2.name}"></a>
+
+                                            <span th:if="${#lists.size(child_l2.children)} gt 0"  th:text="${child_l2.name}"></span>
+
+                                            <ul th:if="${#lists.size(child_l2.children)} gt 0">
+                                                <li th:each="child_l3 : ${child_l2.children}">
+                                                    <a th:href="@{/config/edit.html(targetPath=${child_l3.path})}"
+                                                       th:class="${#strings.equals(child_l3.path, targetPath) ? 'active' : ''}"
+                                                       th:if="${#lists.size(child_l3.children)} eq 0"
+                                                       th:text="${child_l3.name}"></a>
+
+                                                    <span th:if="${#lists.size(child_l3.children)} gt 0" th:text="${child_l3.name}"></span>
+
+                                                    <ul th:if="${#lists.size(child_l3.children)} gt 0" >
+                                                        <li th:each="child_l4 : ${child_l3.children}">
+                                                            <a th:href="@{/config/edit.html(targetPath=${child_l4.path})}"
+                                                               th:class="${#strings.equals(child_l4.path, targetPath) ? 'active' : ''}"
+                                                               th:if="${#lists.size(child_l4.children)} eq 0"
+                                                               th:text="${child_l4.name}"></a>
+
+                                                            <span th:if="${#lists.size(child_l4.children)} eq 0" th:text="${child_l4.name}"></span>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <a class="float-right" th:href="@{/config/add.html}">添加配置</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8"  layout:fragment="main">
+        </div>
+    </div>
+</div>
+</body>
+</html>

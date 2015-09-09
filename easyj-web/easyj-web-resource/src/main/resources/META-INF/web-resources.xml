@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-resources>
+
+    <web-resource name="jquery" version="1.11.3">
+        <js>/jquery/1_11_3/jquery.js</js>
+    </web-resource>
+
+    <web-resource name="jquery" version="2.1.3">
+        <js>/jquery/2_1_3/jquery.js</js>
+    </web-resource>
+
+    <web-resource name="validation" depends="jquery(1.11.3)" version="1.13.1">
+        <js>/validation/1_13_1/jquery.metadata.js</js>
+        <js>/validation/1_13_1/jquery.validate.js</js>
+        <js>/validation/1_13_1/additional-methods.js</js>
+        <js>/validation/1_13_1/localization/messages_zh.js</js>
+    </web-resource>
+
+    <web-resource name="bootstrap" depends="jquery(2.1.3)" version="3.3.2">
+        <css>/bootstrap/3_3_2/css/bootstrap.css</css>
+        <js>/bootstrap/3_3_2/js/bootstrap.js</js>
+    </web-resource>
+
+    <web-resource name="bootstrap-slider" depends="bootstrap(3.3.2)">
+        <css>/bootstrap-slider/slider.css</css>
+        <js>/bootstrap-slider/bootstrap-slider.js</js>
+    </web-resource>
+
+    <web-resource name="bootstrap-wysihtml5" depends="bootstrap(3.3.2)">
+        <css>/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css</css>
+        <js>/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js</js>
+    </web-resource>
+
+    <web-resource name="datatables" depends="bootstrap(3.3.2)" version="1.10.4">
+        <js>/datatables/media/js/jquery.dataTables.min.js</js>
+    </web-resource>
+
+    <web-resource name="datatables-bootstrap" depends="bootstrap(3.3.2)" version="1.10.4">
+        <css>/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css</css>
+        <js>/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js</js>
+    </web-resource>
+
+    <web-resource name="datatables-responsive" depends="bootstrap(3.3.2)" version="1.10.4">
+        <css>/datatables-responsive/css/dataTables.responsive.css</css>
+        <js>/datatables-responsive/js/dataTables.responsive.js</js>
+    </web-resource>
+    <!-- 快捷方式 -->
+    <web-resource name="bootstrap-datatables" depends="datatables,datatables-bootstrap,datatables-responsive"/>
+
+    <web-resource name="treegrid" depends="bootstrap(3.3.2)" version="0.3.0">
+        <css>/treegrid/0_3_0/css/jquery.treegrid.css</css>
+        <js>/treegrid/0_3_0/js/jquery.treegrid.js</js>
+        <js>/treegrid/0_3_0/js/jquery.treegrid.bootstrap3.js</js>
+    </web-resource>
+
+    <web-resource name="ztree" depends="jquery(1.11.3)" version="3.5.17">
+        <css>/ztree/3_5_17/css/zTreeStyle/zTreeStyle.css</css>
+        <js>/ztree/3_5_17/js/jquery.ztree.all-3.5.js</js>
+    </web-resource>
+
+    <web-resource name="easyui" depends="jquery(1.11.3)" version="1.4.2">
+        <css>/easyui/1_4_2/themes/icon.css</css>
+        <js>/easyui/1_4_2/jquery.easyui.min.js</js>
+        <js>/easyui/1_4_2/easyui-lang-zh_CN.js</js>
+    </web-resource>
+    <web-resource name="easyui-default" depends="easyui(1.4.2)">
+        <css>/easyui/1_4_2/themes/default/easyui.css</css>
+    </web-resource>
+    <web-resource name="easyui-gray" depends="easyui(1.4.2)">
+        <css>/easyui/1_4_2/themes/gray/easyui.css</css>
+    </web-resource>
+    <web-resource name="easyui-metro" depends="easyui(1.4.2)">
+        <css>/easyui/1_4_2/themes/metro/easyui.css</css>
+    </web-resource>
+    <web-resource name="easyui-black" depends="easyui(1.4.2)">
+        <css>/easyui/1_4_2/themes/black/easyui.css</css>
+    </web-resource>
+    <web-resource name="easyui-bootstrap" depends="easyui(1.4.2)">
+        <css>/easyui/1_4_2/themes/bootstrap/easyui.css</css>
+    </web-resource>
+</web-resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets>
+    <widget>
+        <class>net.hs.easyj.web.platform.widget.LoginWidget</class>
+        <views>
+            <view name="/system/login-form">
+                <event>login-success</event>
+                <event>login-failure</event>
+            </view>
+            <view name="/system/login-view">
+                <event>click-register</event>
+            </view>
+        </views>
+    </widget>
+</widgets>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.QueryDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.Query" useGeneratedKeys="true" keyProperty="id">
+        insert into query(tenant_id, code, title, description, query, version, enabled, page_size, view_template)
+        values(#{tenantId}, #{code}, #{title}, #{description}, #{query}, #{version}, #{enabled}, #{pageSize}, #{viewTemplate})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.Query">
+        select <include refid="selectColumns"/> from query where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.Query" resultType="net.hs.easyj.saas.model.Query">
+        select <include refid="selectColumns"/> from query <include refid="dynamicWhere" />
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, page_size as pageSize, view_template as viewTemplate, code, title, description, query, version, enabled
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="code != null">
+                and code = #{code}
+            </if>
+            <if test="version != null">
+                and version = #{version}
+            </if>
+            <if test="enabled != null">
+                and enabled = #{enabled}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="net.hs.easyj">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <mvc:annotation-driven/>
+
+    <!--<mvc:interceptors>
+        <bean class="net.hs.easyj.xdoc.interceptor.UIComponentInterceptor"/>
+    </mvc:interceptors>-->
+
+    <mvc:resources mapping="/static/**" location="/WEB-INF/,classpath:/META-INF/web-resources/,classpath:/META-INF/web-components/"/>
+
+    <bean id="/web/component.*" class="net.hs.easyj.web.component.mvc.UIComponentHandler"/>
+
+    <bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="templateEngine" ref="templateEngine" />
+        <property name="characterEncoding" value="UTF-8"/>
+        <property name="order" value="1" />
+    </bean>
+
+    <bean id="templateResolver1" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="characterEncoding" value="UTF-8" />
+        <property name="prefix" value="/WEB-INF/themes/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <property name="cacheable" value="false"/>
+    </bean>
+
+    <bean id="templateResolver2" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="characterEncoding" value="UTF-8" />
+        <property name="prefix" value="/WEB-INF/fragments/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <property name="cacheable" value="false"/>
+    </bean>
+
+    <bean id="templateResolver3" class="org.thymeleaf.templateresolver.ClassLoaderTemplateResolver">
+        <property name="characterEncoding" value="UTF-8" />
+        <property name="prefix" value="META-INF/web-components/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <property name="cacheable" value="false"/>
+    </bean>
+
+    <bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+        <property name="additionalDialects">
+            <set>
+                <bean class="net.hs.easyj.web.component.thymeleaf.dialect.UIDialect"/>
+            </set>
+        </property>
+        <property name="templateResolvers">
+            <set>
+                <ref local="templateResolver1"/>
+                <ref local="templateResolver2"/>
+                <ref local="templateResolver3"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="uiEngine" class="net.hs.easyj.web.component.engine.ConcurrentUIEngine">
+        <property name="uiComponentFactory" ref="uiComponentFactory"/>
+        <property name="uiComponentScanner">
+            <bean class="net.hs.easyj.web.component.scanner.ClassLoaderUIComponentScanner"/>
+        </property>
+    </bean>
+
+    <bean id="uiComponentDataLoader" class="net.hs.easyj.web.component.loader.UIComponentAjaxDataLoader">
+        <property name="uiComponentFactory" ref="uiComponentFactory"/>
+    </bean>
+
+
+    <bean id="uiComponentFactory" class="net.hs.easyj.web.component.factory.SpringUIComponentFactory"/>
+
+    <bean id="xDocScanner" class="net.hs.easyj.web.xdoc.scanner.XDocPatternScanner">
+        <property name="pattern" value="classpath*:META-INF/web-components/**/*XDoc.xml"/>
+    </bean>
+</beans>

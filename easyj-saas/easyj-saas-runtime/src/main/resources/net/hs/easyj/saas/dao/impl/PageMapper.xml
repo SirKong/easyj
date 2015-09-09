@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.PageDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.Page" useGeneratedKeys="true" keyProperty="id">
+        insert into page(tenant_id, parent_id, layout, title, path, type)
+        values(#{tenantId}, #{parentId}, #{layout}, #{title}, #{path}, #{type})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.Page">
+        select <include refid="selectColumns"/> from page where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.Page" resultType="net.hs.easyj.saas.model.Page">
+        select <include refid="selectColumns"/> from page <include refid="dynamicWhere" />
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, parent_id as parentId, id, title, path, type, layout
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test="layout != null">
+                and layout = #{layout}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

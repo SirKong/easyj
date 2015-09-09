@@ -1,0 +1,27 @@
+#north .logo {
+    padding-left: 10px;
+}
+#center .xdoc {
+}
+#center .xdoc ul {
+    list-style: none;
+    padding:0px 10px 10px 10px;
+}
+#center .xdoc-section h3 {
+    color:#CC0000;
+}
+
+#center .xdoc table {
+    border-collapse:collapse;
+    border-spacing:0;
+    width:100%;
+}
+#center .xdoc table th {
+    background:#eee;
+    border:1px solid #8CACBB;
+    padding:0.3em 0.7em;
+}
+#center .xdoc table td {
+    border:1px solid #8CACBB;
+    padding:0.3em 0.7em;
+}

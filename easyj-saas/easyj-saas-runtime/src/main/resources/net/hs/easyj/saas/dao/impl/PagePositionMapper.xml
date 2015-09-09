@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.PagePositionDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.PagePosition" useGeneratedKeys="true" keyProperty="id">
+        insert into page_position(tenant_id, page_id, name) values(#{tenantId}, #{pageId}, #{name})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.PagePosition">
+        select <include refid="selectColumns"/> from page_position where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.PagePosition" resultType="net.hs.easyj.saas.model.PagePosition">
+        select <include refid="selectColumns"/> from page_position <include refid="dynamicWhere" />
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, page_id as pageId, id, name
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="parentId != null">
+                and page_id = #{pageId}
+            </if>
+            <if test="layoutId != null">
+                and position_id = #{positionId}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

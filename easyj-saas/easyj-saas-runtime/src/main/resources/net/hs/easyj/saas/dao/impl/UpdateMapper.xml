@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.UpdateDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.Update" useGeneratedKeys="true" keyProperty="id">
+        insert into `update`(tenant_id, code, title, description, update1, update2, update3, version, enabled, view_template)
+        values(#{tenantId}, #{code}, #{title}, #{description}, #{update1}, #{update2}, #{update3}, #{version}, #{enabled}, #{viewTemplate})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.Update">
+        select <include refid="selectColumns"/> from `update` where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.Update" resultType="net.hs.easyj.saas.model.Update">
+        select <include refid="selectColumns"/> from `update` <include refid="dynamicWhere" />
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, view_template as viewTemplate, code, title, description, update1, update2, update3, version, enabled
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="code != null">
+                and code = #{code}
+            </if>
+            <if test="version != null">
+                and version = #{version}
+            </if>
+            <if test="enabled != null">
+                and enabled = #{enabled}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

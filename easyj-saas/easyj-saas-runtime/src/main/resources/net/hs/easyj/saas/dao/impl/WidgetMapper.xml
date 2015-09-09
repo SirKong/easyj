@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.WidgetDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.Widget" useGeneratedKeys="true" keyProperty="id">
+        insert into widget(tenant_id, position_id, path) values(#{tenantId}, #{positionId}, #{path})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.Widget">
+        select <include refid="selectColumns"/> from widget where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.Widget" resultType="net.hs.easyj.saas.model.Widget">
+        select <include refid="selectColumns"/> from widget <include refid="dynamicWhere" />
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, position_id as positionId, path, id
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="positionId != null">
+                and position_id = #{positionId}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

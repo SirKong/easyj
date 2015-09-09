@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-resources>
+    <web-resource id="webui-core" depends="jquery" version="1.0.0">
+        <js>/webui/core.js</js>
+    </web-resource>
+</web-resources>

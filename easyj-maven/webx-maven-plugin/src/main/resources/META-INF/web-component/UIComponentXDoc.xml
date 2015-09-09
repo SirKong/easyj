@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xdoc name="${componentName}" title="${title}" category="${category}">
+    <section title="描述">
+        描述当前 UI 组件的一些特性以及使用场景
+    </section>
+    <section title="演示" type="link" location="/show/case">
+        ${componentName}Show.html|${title}演示
+    </section>
+    <section title="数据模型" type="code">
+        <![CDATA[
+        {
+            name : "",
+            type : ""
+        }
+        ]]>
+    </section>
+    <section title="主动事件">
+        <![CDATA[
+        <table>
+            <tr>
+                <th>名称</th>
+                <th>入参</th>
+                <th>出参</th>
+            </tr>
+            <tr>
+                <td>自定义事件名</td>
+                <td>json对象格式</td>
+                <td>json对象格式</td>
+            </tr>
+        </table>
+        ]]>
+    </section>
+    <section title="被动事件">
+        <![CDATA[
+        <table>
+            <tr>
+                <th>名称</th>
+                <th>入参</th>
+                <th>出参</th>
+            </tr>
+            <tr>
+                <td>自定义事件名</td>
+                <td>json对象格式</td>
+                <td>json对象格式</td>
+            </tr>
+        </table>
+        ]]>
+    </section>
+    <section title="适配器">
+        <![CDATA[
+        <table>
+            <tr>
+                <th>名称</th>
+                <th>入参</th>
+                <th>出参</th>
+                <th>源事件</th>
+                <th>目标事件</th>
+            </tr>
+            <tr>
+                <td>自定义适配器</td>
+                <td>json对象格式</td>
+                <td>json对象格式</td>
+                <td>自定义事件名</td>
+                <td>自定义事件名</td>
+            </tr>
+        </table>
+        ]]>
+    </section>
+    <section title="UI组件源码" type="link" location="/show/source">
+        ${componentName}.html|${componentName}前端源码－HTML
+        ${componentName}.js|${componentName}前端源码－JS
+        ${componentName}Validate.js|${componentName}前端校验源码－JS
+        ${componentName}Adapter.js|${componentName}前端适配器源码－JS
+        ${componentName}.java|${componentName}服务端源码－java
+    </section>
+</xdoc>

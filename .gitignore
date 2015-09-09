@@ -1,0 +1,12 @@
+# files #
+*.class
+*.iml
+*.log
+.project
+.classpath
+.DS_Store
+
+# directories #
+target/
+.idea/
+dist/

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="zkConnection" class="net.hs.easyj.zk.ZkConnection"
+          init-method="init" destroy-method="close">
+        <property name="zookeepers" value="localhost:2181"/>
+    </bean>
+
+    <bean id="objectConfigStorage" class="net.hs.easyj.config.storage.ZkObjectConfigStorage">
+        <property name="zkConnection" ref="zkConnection"/>
+    </bean>
+
+    <bean id="objectConfigDefinitionScanner" class="net.hs.easyj.config.definition.DefaultObjectConfigDefinitionScanner"/>
+</beans>

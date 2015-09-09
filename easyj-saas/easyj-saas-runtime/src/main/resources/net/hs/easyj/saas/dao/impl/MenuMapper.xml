@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.MenuDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.Menu" useGeneratedKeys="true" keyProperty="id">
+        insert into `menu`(tenant_id, parent_id, name, code, url, `order`)
+        values(#{tenantId}, #{parentId}, #{name}, #{code}, #{url}, #{order})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.Menu">
+        select <include refid="selectColumns"/> from `menu` where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.Menu" resultType="net.hs.easyj.saas.model.Menu">
+        select <include refid="selectColumns"/> from `menu` <include refid="dynamicWhere" />
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, parent_id as parentId, name, code, url, `order`, id
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test="code != null">
+                and code = #{code}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

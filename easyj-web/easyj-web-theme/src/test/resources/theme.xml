@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme name="default">
+    <layout name="layout_login">
+        <position>main</position>
+    </layout>
+    <layout name="layout_main">
+        <position>left</position>
+        <position>main</position>
+        <position>right</position>
+    </layout>
+</theme>

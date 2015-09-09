@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.RoleDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.Role" useGeneratedKeys="true" keyProperty="id">
+        insert into role(tenant_id, code, name, description)
+        values(#{tenantId}, #{code}, #{name}, #{description})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.Role">
+        select <include refid="selectColumns"/> from role where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.Role" resultType="net.hs.easyj.saas.model.Role">
+        select <include refid="selectColumns"/> from role <include refid="dynamicWhere" />
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, name, code, description
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="code != null">
+                and code = #{code}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

@@ -1,0 +1,12 @@
+<div>
+    <ul class="easyui-tree">
+        <li th:each="entry : ${xDocMap}" data-options="state:'closed'">
+            <span th:text="${entry.key}">类目</span>
+            <ul>
+                <li th:each="xDoc : ${entry.value}" th:attr="data-options=${'attributes:{url:&quot;/show/sections?name='+xDoc.name+'&quot;}'}">
+                    <span th:text="${xDoc.title}"></span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

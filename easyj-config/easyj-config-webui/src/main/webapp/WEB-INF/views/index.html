@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorator="layout/layout_1">
+<head>
+    <title>统一配置</title>
+</head>
+<body>
+<div layout:fragment="main">
+    <div class="well well-lg">
+        <form method="post" th:action="@{/index.do}">
+            <div class="form-group">
+                <label for="system">系统</label>
+                <select id="system" name="system" class="form-control">
+                    <option value="pay">统一支付</option>
+                    <option value="czb">充值宝</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="profile">环境</label>
+                <select name="profile" id="profile" class="form-control">
+                    <option value="development">开发环境</option>
+                    <option value="test">测试环境</option>
+                    <option value="production">生产环境</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">确定</button>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

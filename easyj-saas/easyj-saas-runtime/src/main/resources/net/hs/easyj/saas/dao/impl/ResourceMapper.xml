@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.hs.easyj.saas.dao.ResourceDao">
+
+    <insert id="insert" parameterType="net.hs.easyj.saas.model.Resource" useGeneratedKeys="true" keyProperty="id">
+        insert into resource(tenant_id, code, name, description)
+        values(#{tenantId}, #{code}, #{name}, #{description})
+    </insert>
+
+    <select id="select" parameterType="java.lang.Long" resultType="net.hs.easyj.saas.model.Resource">
+        select <include refid="selectColumns"/> from resource where id = #{id}
+    </select>
+
+    <select id="selectByExample" parameterType="net.hs.easyj.saas.model.Resource" resultType="net.hs.easyj.saas.model.Resource">
+        select <include refid="selectColumns"/> from resource <include refid="dynamicWhere" />
+    </select>
+
+    <select id="selectPage" parameterType="net.hs.easyj.saas.model.Resource" resultType="net.hs.easyj.saas.model.Resource">
+        select <include refid="selectColumns"/> from resource order by code
+    </select>
+
+    <!-- Sql Fragments -->
+    <sql id="selectColumns">
+        tenant_id as tenantId, name, code, description
+    </sql>
+    <sql id="dynamicWhere">
+        <where>
+            <if test="id !=null">
+                id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="code != null">
+                and code = #{code}
+            </if>
+        </where>
+    </sql>
+
+</mapper>
