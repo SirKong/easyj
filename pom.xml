@@ -19,9 +19,9 @@
     </modules>
 
     <scm>
-        <url>https://github.com/hs-fcloud/easyj</url>
-        <connection>scm:git:https://github.com/hs-fcloud/easyj.git</connection>
-        <developerConnection>scm:git:https://github.com/hs-fcloud/easyj.git</developerConnection>
+        <url>https://github.com/wusthuke/easyj</url>
+        <connection>scm:git:https://github.com/wusthuke/easyj.git</connection>
+        <developerConnection>scm:git:https://github.com/wusthuke/easyj.git</developerConnection>
       <tag>HEAD</tag>
   </scm>
 
